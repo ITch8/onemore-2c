@@ -1,0 +1,25 @@
+{
+  "envelope": ["code", "message", "data"],
+  "endpoints": [
+    { "method": "GET", "path": "/api/v1/temu-ops/status", "permission": "temu.view" },
+    { "method": "GET", "path": "/api/v1/temu-ops/tasks", "permission": "temu.view" },
+    { "method": "GET", "path": "/api/v1/temu-ops/listings", "permission": "temu.view" },
+    { "method": "POST", "path": "/api/v1/temu-ops/listings", "permission": "temu.operate" },
+    { "method": "POST", "path": "/api/v1/temu-ops/listings/:id/submit", "permission": "temu.operate" },
+    { "method": "GET", "path": "/api/v1/temu-ops/price-stock/rules", "permission": "temu.view" },
+    { "method": "POST", "path": "/api/v1/temu-ops/price-stock/preview", "permission": "temu.view" },
+    { "method": "POST", "path": "/api/v1/temu-ops/price-stock/apply", "permission": "temu.operate" },
+    { "method": "GET", "path": "/api/v1/temu-ops/orders", "permission": "temu.view" },
+    { "method": "POST", "path": "/api/v1/temu-ops/orders/pull", "permission": "temu.operate" },
+    { "method": "POST", "path": "/api/v1/temu-ops/orders/:id/label", "permission": "temu.operate" },
+    { "method": "POST", "path": "/api/v1/temu-ops/orders/:id/ship", "permission": "temu.operate" },
+    { "method": "GET", "path": "/api/v1/temu-ops/ads/suggestions", "permission": "temu.view" },
+    { "method": "POST", "path": "/api/v1/temu-ops/ads/optimize", "permission": "temu.operate" },
+    { "method": "POST", "path": "/api/v1/temu-ops/ads/suggestions/:id/confirm", "permission": "temu.operate" },
+    { "method": "POST", "path": "/api/v1/temu-ops/ads/suggestions/:id/apply", "permission": "temu.operate" },
+    { "method": "GET", "path": "/api/v1/temu-ops/cs/tickets", "permission": "temu.view" },
+    { "method": "POST", "path": "/api/v1/temu-ops/cs/tickets/pull", "permission": "temu.operate" },
+    { "method": "POST", "path": "/api/v1/temu-ops/cs/tickets/:id/suggest", "permission": "temu.operate" },
+    { "method": "POST", "path": "/api/v1/temu-ops/cs/tickets/:id/confirm", "permission": "temu.operate" }
+  ]
+}

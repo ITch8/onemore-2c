@@ -115,6 +115,34 @@ docker compose -f docker-compose.full.yml up -d --build
 | `REDIS_PASSWORD` | 空 | backend | 是 | Redis 密码。 |
 | `REDIS_DB` | `0` | backend | 否 | Redis DB 编号。 |
 
+## Temu 卖家运营
+
+默认 `TEMU_API_MODE=mock`，不访问 Temu，也不写入平台。完整说明见 [Temu 店铺运营](temu-ops.md)。`docker-compose.full.yml` 已通过 `env_file` 把根目录 `.env` 传给 backend，无需在 Compose 里重复声明这些变量。
+
+后台设置分组 `platform_temu` 中已保存的非空 `app_key`、`app_secret`、`access_token`、`region`、`api_base_url` 会覆盖对应环境变量。`TEMU_API_MODE` 与 `TEMU_LIVE_WRITES` 只由环境变量决定。
+
+| 变量 | 示例 / 默认 | 服务 | 敏感 | 说明 |
+| --- | --- | --- | --- | --- |
+| `TEMU_API_MODE` | `mock` | backend | 否 | 只有精确等于 `live` 才调用 Temu。其他值均为演示模式。 |
+| `TEMU_LIVE_WRITES` | `false` | backend | 否 | 正式写入总开关。还须当次请求 `confirmLive=true` 且凭证齐全。 |
+| `TEMU_APP_KEY` | 空 | backend | 否 | 应用标识。可被设置覆盖。 |
+| `TEMU_APP_SECRET` | 空 | backend | 是 | 应用密钥。可被加密设置覆盖。 |
+| `TEMU_ACCESS_TOKEN` | 空 | backend | 是 | 访问令牌。可被加密设置覆盖。 |
+| `TEMU_REGION` | `us` | backend | 否 | `us`、`eu` 或 `global`。 |
+| `TEMU_API_BASE_URL` | 空 | backend | 否 | 留空时使用对应区域的 `openapi-b-*.temu.com` 路由。 |
+| `TEMU_HTTP_TIMEOUT_SECONDS` | `20` | backend | 否 | 外部请求超时，允许 5–60 秒。 |
+| `TEMU_API_ALLOW_UNLISTED_HOST` | `false` | backend | 否 | 仅开发或测试放宽主机校验。`APP_ENV=production` 或 `staging` 时强制关闭。 |
+| `TEMU_API_TYPE_PING` | `bg.open.accesstoken.info.get` | backend | 否 | 连接测试方法名。上线前须按店铺目录核对。 |
+| `TEMU_API_TYPE_LISTING` | `bg.local.goods.add` | backend | 否 | 上架方法名。 |
+| `TEMU_API_TYPE_PRICE` | `bg.local.goods.price.edit` | backend | 否 | 改价方法名。 |
+| `TEMU_API_TYPE_STOCK` | `bg.local.goods.stock.edit` | backend | 否 | 改库存方法名。 |
+| `TEMU_API_TYPE_ORDERS` | `bg.order.list.v2.get` | backend | 否 | 拉单方法名。 |
+| `TEMU_API_TYPE_LABEL` | `bg.logistics.shipment.document.get` | backend | 否 | 面单方法名。 |
+| `TEMU_API_TYPE_SHIP` | `bg.logistics.shipment.confirm` | backend | 否 | 发货回传方法名。 |
+| `TEMU_API_TYPE_AFTERSALES` | `bg.aftersales.refund.list.get` | backend | 否 | 售后拉取方法名。 |
+| `TEMU_API_TYPE_ADS` | 空 | backend | 否 | 广告方法名。留空表示未覆盖，不启用浏览器自动化。 |
+| `TEMU_API_TYPE_CS_SEND` | 空 | backend | 否 | 客服发送方法名。留空时回复只保存在本地。 |
+
 ## Collector
 
 | 变量 | 示例 / 默认 | 服务 | 敏感 | 说明 |

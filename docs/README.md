@@ -13,6 +13,7 @@
 - [AI 客服回复设计](CUSTOMER_AI_REPLY_SUGGESTION_DESIGN.md)
 - [客服中心设计](CUSTOMER_SERVICE_CENTER_DESIGN.md)
 - [Provider 扩展](provider.md)
+- [Temu 店铺运营](temu-ops.md)
 - [系统架构](architecture.md)
 
 ## 生产运维

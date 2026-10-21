@@ -445,6 +445,18 @@ export const COMMON_STATUS_LABEL: Record<string, string> = {
   store_permission_denied: '无店铺权限',
   inventory_sync_enabled: '库存同步已开启',
   manual_bound: '人工绑定',
+  needs_confirm: '待确认',
+  demo_saved: '演示记录已保存',
+  submitted: '已提交',
+  label_ready: '面单已准备',
+  shipment_confirmed: '发货已回传',
+  replied_local: '回复已保存',
+  api_gap: '接口未覆盖',
+  pending_shipment: '待发货',
+  sent: '已发送',
+  confirmed: '已确认',
+  applied: '已记录执行',
+  open: '待处理',
 };
 
 export function commonStatusLabel(status?: string | null): string {
