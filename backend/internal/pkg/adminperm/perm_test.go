@@ -73,6 +73,12 @@ func TestPermissionsForRole(t *testing.T) {
 	if StrictHasPermission(RoleReviewer, PermLogisticsManage) || StrictHasPermission(RoleReadonly, PermLogisticsManage) {
 		t.Fatal("reviewer and readonly must not mutate logistics configuration")
 	}
+	if !StrictHasPermission(RoleOperator, PermTemuOperate) || !StrictHasPermission(RoleReviewer, PermTemuView) || !StrictHasPermission(RoleReadonly, PermTemuView) {
+		t.Fatal("Temu ops roles should receive view access, and operators should be able to record actions")
+	}
+	if StrictHasPermission(RoleReviewer, PermTemuOperate) || StrictHasPermission(RoleReadonly, PermTemuOperate) {
+		t.Fatal("reviewer and readonly must not operate Temu seller actions")
+	}
 	if !StrictHasPermission(RoleOperator, PermSalesReturnRefund) || StrictHasPermission(RoleReviewer, PermSalesReturnRefund) || StrictHasPermission(RoleReadonly, PermSalesReturnRefund) {
 		t.Fatal("only operator and admin roles should execute sales refunds")
 	}

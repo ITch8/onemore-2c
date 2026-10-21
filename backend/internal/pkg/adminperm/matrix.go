@@ -88,6 +88,10 @@ const (
 	PermSKUBindingManage        = "sku_binding.manage"
 	PermSKUBindingResolveManual = "sku_binding.resolve_manual"
 	PermInventorySyncAuditRead  = "inventory_sync.audit.read"
+	// Temu seller operations. View is read-only; operate still cannot call Temu
+	// unless the deployment explicitly enables live writes.
+	PermTemuView    = "temu.view"
+	PermTemuOperate = "temu.operate"
 )
 
 var allPermissions = []string{
@@ -170,6 +174,8 @@ var allPermissions = []string{
 	PermSKUBindingManage,
 	PermSKUBindingResolveManual,
 	PermInventorySyncAuditRead,
+	PermTemuView,
+	PermTemuOperate,
 }
 
 var adminPermissions = append([]string(nil), allPermissions...)
@@ -200,6 +206,7 @@ var reviewerPermissions = []string{
 	PermWarehouseFeeView,
 	PermAdvertisingFeeView,
 	PermFreightFeeView,
+	PermTemuView,
 }
 
 var operatorPermissions = []string{
@@ -261,6 +268,8 @@ var operatorPermissions = []string{
 	PermFreightFeeView,
 	PermFreightFeeImport,
 	PermFreightFeeManage,
+	PermTemuView,
+	PermTemuOperate,
 }
 
 var readonlyPermissions = []string{
@@ -290,6 +299,7 @@ var readonlyPermissions = []string{
 	PermWarehouseFeeView,
 	PermAdvertisingFeeView,
 	PermFreightFeeView,
+	PermTemuView,
 }
 
 // PermissionsForRole returns granted permission keys for a role.

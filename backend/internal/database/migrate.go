@@ -37,6 +37,7 @@ import (
 	"github.com/trademind-ai/trademind/backend/internal/modules/shop"
 	"github.com/trademind-ai/trademind/backend/internal/modules/supplier"
 	"github.com/trademind-ai/trademind/backend/internal/modules/taskcenter"
+	"github.com/trademind-ai/trademind/backend/internal/modules/temuops"
 	"github.com/trademind-ai/trademind/backend/internal/modules/warehouse"
 	"github.com/trademind-ai/trademind/backend/internal/modules/warehousefee"
 	"github.com/trademind-ai/trademind/backend/internal/modules/worker"
@@ -255,6 +256,13 @@ func AutoMigrate(db *gorm.DB) error {
 		&warehouse.WarehouseLocation{},
 		&logistics.ShippingChannel{},
 		&logistics.ShippingRateTemplate{},
+		&temuops.TemuOpsTask{},
+		&temuops.TemuListing{},
+		&temuops.TemuPriceRule{},
+		&temuops.TemuOrderSnapshot{},
+		&temuops.TemuFulfillment{},
+		&temuops.TemuAdSuggestion{},
+		&temuops.TemuCSTicket{},
 		&inventory.WarehouseStockBalance{},
 		&inventory.WarehouseSKUPlacement{},
 		&inventory.InventoryMovement{},

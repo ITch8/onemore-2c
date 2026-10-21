@@ -4,6 +4,12 @@ All notable changes to TradeMind are documented here.
 
 ## Unreleased
 
+### Temu seller operations
+
+- Added a fail-closed Temu seller layer for listing, price and stock, order snapshots and shipment feedback, ad suggestions, and customer-service replies. Default mode is local demo and does not call Temu.
+- Live writes require `TEMU_API_MODE=live`, `TEMU_LIVE_WRITES=true`, `confirmLive=true`, and credentials. Ad budget changes and customer-service sends stay uncovered unless a method name is configured, and they do not use browser automation.
+- Temu records do not write ERP orders, inventory, or warehouse ledgers, and existing publish, order-sync, and inventory workers do not treat Temu as runnable. 1688, Pinduoduo, and collector behavior is unchanged.
+
 ### Container publishing and release pipeline
 
 - Unified backend, admin, and collector candidates under `ghcr.io/lien0219/trademind` with commit-scoped tags, OCI source labels, SBOM, provenance, platform checks, and Trivy gates.

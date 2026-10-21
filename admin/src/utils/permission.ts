@@ -69,6 +69,8 @@ export const PERMISSIONS = {
   CONFIG_MANAGE: 'config.manage',
   INVENTORY_SYNC_READ: 'inventory_sync.read',
   INVENTORY_SYNC_RUN: 'inventory_sync.run',
+  TEMU_VIEW: 'temu.view',
+  TEMU_OPERATE: 'temu.operate',
 } as const;
 
 export type PermissionKey = (typeof PERMISSIONS)[keyof typeof PERMISSIONS];
@@ -127,6 +129,8 @@ const ROLE_PERMISSIONS: Record<string, PermissionKey[]> = {
     PERMISSIONS.FREIGHT_FEE_VIEW,
     PERMISSIONS.FREIGHT_FEE_IMPORT,
     PERMISSIONS.FREIGHT_FEE_MANAGE,
+    PERMISSIONS.TEMU_VIEW,
+    PERMISSIONS.TEMU_OPERATE,
   ],
   reviewer: [
     PERMISSIONS.OPERATION_TASK_AUDIT_READ,
@@ -146,6 +150,7 @@ const ROLE_PERMISSIONS: Record<string, PermissionKey[]> = {
     PERMISSIONS.WAREHOUSE_FEE_VIEW,
     PERMISSIONS.ADVERTISING_FEE_VIEW,
     PERMISSIONS.FREIGHT_FEE_VIEW,
+    PERMISSIONS.TEMU_VIEW,
   ],
   readonly: [
     PERMISSIONS.PRODUCT_VIEW,
@@ -168,6 +173,7 @@ const ROLE_PERMISSIONS: Record<string, PermissionKey[]> = {
     PERMISSIONS.WAREHOUSE_FEE_VIEW,
     PERMISSIONS.ADVERTISING_FEE_VIEW,
     PERMISSIONS.FREIGHT_FEE_VIEW,
+    PERMISSIONS.TEMU_VIEW,
   ],
 };
 

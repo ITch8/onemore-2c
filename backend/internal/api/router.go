@@ -65,6 +65,7 @@ import (
 	"github.com/trademind-ai/trademind/backend/internal/modules/storagepublic"
 	"github.com/trademind-ai/trademind/backend/internal/modules/supplier"
 	"github.com/trademind-ai/trademind/backend/internal/modules/taskcenter"
+	"github.com/trademind-ai/trademind/backend/internal/modules/temuops"
 	"github.com/trademind-ai/trademind/backend/internal/modules/warehouse"
 	"github.com/trademind-ai/trademind/backend/internal/modules/warehousefee"
 	"github.com/trademind-ai/trademind/backend/internal/modules/webhook"
@@ -79,6 +80,7 @@ import (
 	platformdouyin "github.com/trademind-ai/trademind/backend/internal/providers/platform/douyinshop"
 	platformlazada "github.com/trademind-ai/trademind/backend/internal/providers/platform/lazada"
 	platformshopee "github.com/trademind-ai/trademind/backend/internal/providers/platform/shopee"
+	platformtemu "github.com/trademind-ai/trademind/backend/internal/providers/platform/temu"
 	platformtiktok "github.com/trademind-ai/trademind/backend/internal/providers/platform/tiktok"
 	"github.com/trademind-ai/trademind/backend/internal/rdb"
 	"gorm.io/gorm"
@@ -494,6 +496,7 @@ func Register(r gin.IRouter, dep *Deps) (*collect.Service, *imagetask.Service, *
 	platformlazada.RegisterProvider()
 	platformamazon.BindShops(shopSvc.AmazonShopsBridge())
 	platformamazon.RegisterProvider()
+	platformtemu.RegisterProvider()
 	shopH := &shop.Handler{Svc: shopSvc}
 
 	storagePublicSvc := &storagepublic.Service{Settings: settingsSvc, OpLog: opLogSvc}
@@ -864,6 +867,12 @@ func Register(r gin.IRouter, dep *Deps) (*collect.Service, *imagetask.Service, *
 	inventory.Register(authed, inventoryH)
 	warehouse.Register(authed, warehouseH)
 	logistics.Register(authed, logisticsH)
+	temuGateway := &temuops.Gateway{Config: platformtemu.LoadConfig()}
+	if settingsSvc != nil {
+		temuGateway.PlainSettings = settingsSvc.PlainByGroup
+	}
+	temuOpsH := &temuops.Handler{Svc: &temuops.Service{DB: dep.DB, Gateway: temuGateway}, OpLog: opLogSvc}
+	temuops.Register(authed, temuOpsH)
 	supplier.Register(authed, supplierH)
 	procurement.Register(authed, procurementH)
 	salesreturn.Register(authed, salesReturnH)

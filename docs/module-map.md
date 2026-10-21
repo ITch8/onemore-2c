@@ -32,6 +32,7 @@
 | Storage Provider | Provider 接口、文件上传 API、settings.storage、本地/对象存储文档、`docs/provider.md` |
 | Image Provider | 图片任务、队列、settings.image、任务页面、`docs/provider.md` |
 | Platform Provider | 店铺授权、Token 加密、平台配置、订单/库存/客服调用方、`docs/provider.md`、`SECURITY.md` |
+| Temu 卖家运营 | `backend/internal/modules/temuops`、`backend/internal/providers/platform/temu`、`backend/internal/api/router.go`、`backend/internal/database/migrate.go`、`backend/internal/pkg/adminperm`、`admin/src/pages/TemuOps`、`admin/src/services/temuOps.ts`、`admin/config/routes.ts`、`admin/e2e/specs/temu-ops.spec.ts`、`tests/contracts/temu-ops.*`、`.env.example`、`docs/env.md`、`docs/api.md`、`docs/temu-ops.md`、`docs/provider.md`；必须保持 `TEMU_API_MODE` 默认 mock、正式写入三道开关、密钥加密与脱敏、幂等键、金额最小单位、不写入 ERP 订单/库存/仓库账、不接入现有刊登与库存 Worker、广告和客服发送默认缺口、不启用浏览器卖家中心自动化，且不改变 1688、拼多多和采集器行为。 |
 | AI 客服自动回复 | `customerchat` tenant setting/policy/run model、`customersync` 动态轮询与入站触发、独立 Redis Worker、平台客服 Provider、AI Prompt/Gateway、失败事件、操作日志、Admin 运行设置与店铺策略页、`.env.example`、`docs/env.md`、`docs/CUSTOMER_AI_REPLY_SUGGESTION_DESIGN.md` |
 | 告警中心 / 外部通知 | 业务告警 `backend/internal/modules/taskcenter`、系统告警 `backend/internal/modules/alerting`、settings `alert_notify`、Admin `TaskCenter/Alerts`、可观测性概览、`adminperm`、`docs/api.md` |
 | 可观测性 / 指标入口 / SLO | `backend/internal/pkg/metrics` 结构化快照、`backend/internal/modules/alerting` 窗口告警、`backend/internal/modules/observabilitymod` 概览与 SLO、可信代理/CIDR 配置、`deploy/nginx/*.conf`、Admin `Ops/Observability`、API 契约、`.env.example`、`docs/env.md`、`docs/docker-deployment.md` |

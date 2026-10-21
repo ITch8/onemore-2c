@@ -520,6 +520,33 @@ SKU 元数据写接口只允许访问当前租户可见商品；跨租户商品�
 
 `POST open-login-browser` 与 `check-login` 使用同一 **`pinduoduo` Profile**（与 1688、custom 隔离）。采集浏览器登录窗口 **1280×900**。
 
+## Temu 店铺运营
+
+前缀 `/api/v1/temu-ops`，需要登录。查看权限 `temu.view`，写操作权限 `temu.operate`。响应仍是 `{ code, message, data }`。金额为整数最小货币单位。默认演示模式不访问 Temu；正式写入还要部署开关 `TEMU_LIVE_WRITES=true` 且当次 body 含 `confirmLive=true`。管理端页面固定传 `confirmLive=false`。这些记录不写入现有 ERP 订单、库存或仓库账。字段与失败关闭边界见 [Temu 店铺运营](temu-ops.md)。
+
+| 方法 | 路径 | 说明 |
+| --- | --- | --- |
+| `GET` | `/api/v1/temu-ops/status` | 运行模式、正式写入开关、凭证是否齐全、各模块计数。 |
+| `GET` | `/api/v1/temu-ops/tasks` | 运营任务记录。可选 `module`。 |
+| `GET` | `/api/v1/temu-ops/listings` | 上架记录。 |
+| `POST` | `/api/v1/temu-ops/listings` | 从商品草稿编号或来源链接创建上架草稿。支持幂等键。 |
+| `POST` | `/api/v1/temu-ops/listings/:id/submit` | 演示模式保存本地记录；正式模式在三道开关齐备时调用上架方法。 |
+| `GET` | `/api/v1/temu-ops/price-stock/rules` | 跟价与库存规则。 |
+| `POST` | `/api/v1/temu-ops/price-stock/preview` | 只试算，不写库。 |
+| `POST` | `/api/v1/temu-ops/price-stock/apply` | 保存跟价结果。演示模式不调用 Temu。 |
+| `GET` | `/api/v1/temu-ops/orders` | Temu 订单快照。 |
+| `POST` | `/api/v1/temu-ops/orders/pull` | 演示模式返回样例订单；正式模式按方法名拉单。 |
+| `POST` | `/api/v1/temu-ops/orders/:id/label` | 准备面单引用。演示模式不是承运商文件。 |
+| `POST` | `/api/v1/temu-ops/orders/:id/ship` | 校验承运商与运单号后回传。演示模式不发送。 |
+| `GET` | `/api/v1/temu-ops/ads/suggestions` | 广告预算建议。 |
+| `POST` | `/api/v1/temu-ops/ads/optimize` | 按花费与成交额生成建议，状态为待确认。 |
+| `POST` | `/api/v1/temu-ops/ads/suggestions/:id/confirm` | 人工确认建议。 |
+| `POST` | `/api/v1/temu-ops/ads/suggestions/:id/apply` | 记录执行。未配置广告方法时状态为接口未覆盖。 |
+| `GET` | `/api/v1/temu-ops/cs/tickets` | 客服与售后工单。 |
+| `POST` | `/api/v1/temu-ops/cs/tickets/pull` | 演示模式返回样例工单。 |
+| `POST` | `/api/v1/temu-ops/cs/tickets/:id/suggest` | 生成建议回复，不发送。 |
+| `POST` | `/api/v1/temu-ops/cs/tickets/:id/confirm` | 人工确认后默认只本地保存。 |
+
 ## 店铺与平台
 
 | 方法 | 路径 | 说明 |

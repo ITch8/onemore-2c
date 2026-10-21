@@ -314,6 +314,48 @@ export default [
     ],
   },
   {
+    path: '/temu-ops',
+    name: 'Temu 运营',
+    icon: 'TagsOutlined',
+    component: '@/layouts/TemuOpsLayout',
+    routes: [
+      {
+        path: '/temu-ops',
+        redirect: '/temu-ops/overview',
+      },
+      {
+        path: '/temu-ops/overview',
+        name: '运营总览',
+        component: './TemuOps/Overview',
+      },
+      {
+        path: '/temu-ops/listings',
+        name: '商品上架',
+        component: './TemuOps/Listings',
+      },
+      {
+        path: '/temu-ops/price-stock',
+        name: '价格与库存',
+        component: './TemuOps/PriceStock',
+      },
+      {
+        path: '/temu-ops/orders',
+        name: '订单履约',
+        component: './TemuOps/Orders',
+      },
+      {
+        path: '/temu-ops/ads',
+        name: '广告优化',
+        component: './TemuOps/Ads',
+      },
+      {
+        path: '/temu-ops/customer-service',
+        name: '客服与售后',
+        component: './TemuOps/CustomerService',
+      },
+    ],
+  },
+  {
     path: '/shops',
     name: '店铺',
     icon: 'ShopOutlined',
